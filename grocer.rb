@@ -55,5 +55,22 @@ def apply_clearance(cart)
 end
 
 def checkout(cart, coupons)
-  # code here
+  condensedCart = consolidate_cart(cart)
+  couponCart = apply_coupons(condensedCart, coupons)
+  finalCart = apply_clearance(couponCart)
+ 
+  total = 0
+  
+  finalCart.each {|item, infoHash|
+    itemPrice = infoHash[:price]
+    total += itemPrice
+  }
+  
+  if total > 100
+    discount = total * 0.1
+    newTotal = total - discount
+    return newTotal
+  else
+    return total
+  end
 end
