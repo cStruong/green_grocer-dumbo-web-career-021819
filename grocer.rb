@@ -62,7 +62,7 @@ def checkout(cart, coupons)
   total = 0
   
   finalCart.each {|item, infoHash|
-    itemPrice = infoHash[:price]
+    itemPrice = infoHash[:price] * infoHash[:count]
     total += itemPrice
   }
   
